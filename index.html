@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="./index.css">
+    </head>
+  
+<body>
+	<div id="container">
+		<div id="content">
+				<div>
+					<input type="text" id="my_input" placeholder="Enter number(s) or Range" >
+				</div>
+				<div id="result">
+					<div class="snippet">
+						<span class="key">Existing : </span>
+						<span class = "value" id="existing"></span>
+					</div>
+					<div class="snippet">
+						<span class="key">Duplicates : </span>
+						<span class = "value" id="duplicates"></span>
+					</div>
+					<div class="snippet">
+						<span class="key">Newly Added : </span>
+						<span class = "value" id="unique"></span>
+					</div>
+					<div class="snippet">
+						<span class="key"> Final List of Numbers : </span>
+						<span class = "value" id="final_list"></span>
+					</div>
+					<span id="error_message"></span>
+				</div>
+			
+		</div>
+	</div>
+</body>
+<script>
+	/* function */
+	/*
+		Show the 1.newly added list, 2.unique list, 3. duplicates in the entry
+	*/
+
+	var value = ""
+	var existing_numbers = [5,6,7,8, 9, 10, 11];
+		addToSection('existing', existing_numbers.join(' , '))
+	document.getElementById("my_input").onkeyup = function(event) {
+		let unique = [], finalList = [], duplicates = []
+		value = event.target.value;
+		let numbers = []
+		value.split(',').filter(x => x).map(x => {
+			debugger
+			if(x.match("-")) {
+				let [start, end] = x.split("-")
+				if(!Number.isNaN(parseInt(start)) && !Number.isNaN(parseInt(end))) {
+					start = parseInt(start)
+					end = parseInt(end)
+					for(let i = start; i<=end; i++) {
+						numbers.push(parseInt(i))
+					}
+				}
+			} else {
+				numbers.push(parseInt(x))
+			}
+		})
+		const valid = numbers.reduce((valid, x) => valid ? x > 0 : false, true)
+		document.getElementById('error_message').innerHTML = valid ? '' : 'Input contains non integers.';
+		if(!valid) return
+		finalList.push(...existing_numbers)
+		duplicates = numbers.reduce((dupes, x) => {
+			if(existing_numbers.includes(x)){
+				return dupes.concat([x])
+			} else {
+				if(!unique.includes(x)) {
+					unique.push(x)
+				}
+				return dupes
+			}
+		}, [])
+		finalList.push(...unique)
+		let msg = ''
+		existing_numbers = existing_numbers.sort()
+		duplicates = duplicates.sort()
+		unique = unique.sort()
+		finalList = finalList.sort()
+		addToSection('unique', unique.join(' , '))
+		
+		addToSection('duplicates', duplicates.join(' , '))
+		
+		addToSection('final_list', finalList.join(' , '))
+	}
+
+	function addToSection (id, message) {
+		document.getElementById(id).innerHTML = message		
+	}
+
+</script>
+</html>

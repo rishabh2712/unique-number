@@ -1,0 +1,75 @@
+body, html {
+    background-color: #efefef;
+    margin: 0;
+    cursor: default;
+    min-height: 100%; 
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif
+}
+
+#container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+}
+
+#result {
+    padding: 10px;
+    border: 1px solid #bbbbbb;
+    min-width: 20em;
+}
+
+.snippet {
+    min-height: 40px
+}
+
+.key {
+ color: #383838;
+ font-weight: 500;
+ font-size: 13px;   
+}
+
+.value {
+    padding: 4px 0px;
+    max-width: 20em;
+    font-size: 11px;
+    display: flex;
+    flex-wrap: wrap;
+    letter-spacing: 1px;
+}
+
+#content {
+    width: fit-content;
+    flex-direction: column;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center
+}
+
+#my_input {
+ padding: 10px;
+ font-size: 13px;
+ margin: 15px 0px;   
+}
+
+#error_message {
+    color: #721c24;
+    font-size: small;   
+    margin-top: 3px;
+}
+
+.hide {
+    display: none
+}
+
+.alert {
+    position: relative;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
